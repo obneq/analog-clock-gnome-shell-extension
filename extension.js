@@ -108,6 +108,14 @@ ClockButton.prototype = {
     box.add(this._calendar.actor);
     this._calendar._update(true);
 
+    this.menu.connect('open-state-changed', 
+                      Lang.bind(this, function(menu, isOpen) {
+                          if (isOpen) {
+                              let now = new Date();
+                              this._calendar.setDate(now, true);
+                              }
+                      }));
+
     this._updateMenu();
 
     this._clockButton = new St.BoxLayout();
